@@ -2,11 +2,13 @@ import { Row } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 
 function QADropdown({ data, deleteQuestionAndAnswer }) {
+
+    const questionData= JSON.parse(localStorage.getItem('questionsAndAnswers'))
   return (
     <Row>
       <Accordion>
-        {data.length > 0 ? (
-          data.map((item) => (
+        {questionData && questionData.length > 0 ? (
+          questionData.map((item) => (
             <Accordion.Item
               eventKey={item.id}
               className="my-2 rounded-3 border"

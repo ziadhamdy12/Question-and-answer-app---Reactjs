@@ -6,34 +6,37 @@ import { dummyQuestionsAndAnswers } from '../../utilis/dummy'
 import { toast } from 'react-toastify'
 
 function HomeScreen() {
+
+    const questionData= JSON.parse(localStorage.getItem('questionsAndAnswers'))
     const [questionsAndAnswers, setQuestionsAndAnswers] = useState(dummyQuestionsAndAnswers)
     const addQuestionAndAnswer = () => {
-    
+    localStorage.setItem('questionsAndAnswers', JSON.stringify([...dummyQuestionsAndAnswers]))
         setQuestionsAndAnswers([...dummyQuestionsAndAnswers])
         toast.success('تم إضافة السؤال والإجابة بنجاح')
 
         console.log(questionsAndAnswers)
     }
     const deleteAllQuestionsAndAnswers = () => {
-        if(questionsAndAnswers.length === 0) {
+        if(questionData.length === 0) {
             toast.error('لا يوجد بيانات لحذف')
             return
         }else{
         toast.success('تم حذف البيانات بنجاح')
-
+        localStorage.removeItem('questionsAndAnswers')
         setQuestionsAndAnswers([])
         dummyQuestionsAndAnswers.splice(0, dummyQuestionsAndAnswers.length)
         }
     }
 
    const deleteQuestionAndAnswer = (id) => {
-        if(questionsAndAnswers.length === 0) {
+        if(questionData.length === 0) {
             toast.error('لا يوجد بيانات لحذف')
             return
         }else{
         toast.success('تم حذف السؤال والإجابة بنجاح')
         setQuestionsAndAnswers(questionsAndAnswers.filter((item) => item.id !== id))
         dummyQuestionsAndAnswers.splice(dummyQuestionsAndAnswers.findIndex((item) => item.id === id), 1)
+        localStorage.setItem('questionsAndAnswers', JSON.stringify([...dummyQuestionsAndAnswers]))
         }
     }
 
