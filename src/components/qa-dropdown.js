@@ -1,7 +1,7 @@
 import { Row } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 
-function QADropdown({ data, deleteQuestionAndAnswer }) {
+function QADropdown({ data, deleteOneQuestionAndAnswer }) {
 
     const questionData= JSON.parse(localStorage.getItem('questionsAndAnswers'))
   return (
@@ -20,7 +20,7 @@ function QADropdown({ data, deleteQuestionAndAnswer }) {
               <Accordion.Body>
                 <div className="px-3 d-inline">{item.answer}</div>
                 <button
-                  onClick={() => deleteQuestionAndAnswer(item.id)}
+                  onClick={() => deleteOneQuestionAndAnswer(item.id)}
                   className="btn-color"
                 >
                   مسح السؤال

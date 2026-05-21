@@ -14,7 +14,7 @@ function HomeScreen() {
         setQuestionsAndAnswers([...dummyQuestionsAndAnswers])
         toast.success('تم إضافة السؤال والإجابة بنجاح')
 
-        console.log(questionsAndAnswers)
+        console.log(questionData)
     }
     const deleteAllQuestionsAndAnswers = () => {
         if(questionData.length === 0) {
@@ -28,15 +28,19 @@ function HomeScreen() {
         }
     }
 
-   const deleteQuestionAndAnswer = (id) => {
+   const deleteOneQuestionAndAnswer = (id) => {
         if(questionData.length === 0) {
             toast.error('لا يوجد بيانات لحذف')
             return
         }else{
+            
         toast.success('تم حذف السؤال والإجابة بنجاح')
-        setQuestionsAndAnswers(questionsAndAnswers.filter((item) => item.id !== id))
+        setQuestionsAndAnswers(questionData.filter((item) => item.id !== id))
         dummyQuestionsAndAnswers.splice(dummyQuestionsAndAnswers.findIndex((item) => item.id === id), 1)
         localStorage.setItem('questionsAndAnswers', JSON.stringify([...dummyQuestionsAndAnswers]))
+        if(dummyQuestionsAndAnswers.length === 0) {
+            localStorage.removeItem('questionsAndAnswers')
+        }
         }
     }
 
@@ -56,7 +60,7 @@ function HomeScreen() {
                     <FormInputs addQuestionAndAnswer={addQuestionAndAnswer}
                     
                     />
-                    <QADropdown data={questionsAndAnswers}  deleteQuestionAndAnswer={deleteQuestionAndAnswer}/>
+                    <QADropdown data={questionData}  deleteOneQuestionAndAnswer={deleteOneQuestionAndAnswer}/>
                     {questionsAndAnswers.length > 0 && (
                         <button 
                         onClick={deleteAllQuestionsAndAnswers}
