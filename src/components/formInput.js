@@ -3,7 +3,7 @@ import { Row, Col, Form,  } from "react-bootstrap";
 import { dummyQuestionsAndAnswers } from "../utilis/dummy";
 import {  toast } from 'react-toastify';
 
-function FormInputs({ addQuestionAndAnswer }) {
+function FormInputs({ addQuestionAndAnswer, deleteQuestionAndAnswer }) {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
 
